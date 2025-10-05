@@ -2,8 +2,8 @@
 
 ## Prerequisites
 
-- Python 3.8+ 
-- Google AI API Key (for Gemini LLM)
+- Python 3.8+
+- OpenAI API Key (for LLM)
 - Git
 
 ## Quick Setup
@@ -25,8 +25,10 @@ pip install -r requirements.txt
 #### Set Environment Variables
 Create a `.env` file in the `backend/` directory:
 ```bash
-# Required: Get your API key from https://makersuite.google.com/app/apikey
-GOOGLE_API_KEY=your_google_api_key_here
+# Required: OpenAI API key https://platform.openai.com/api-keys
+OPENAI_API_KEY=your_openai_api_key_here
+# Optional model override
+OPENAI_MODEL=gpt-4o-mini
 
 # Optional: Customize these paths
 CHROMA_DB_PATH=./chroma_db
@@ -93,9 +95,9 @@ Simply open `frontend/index.html` in your web browser.
    - Make sure you're running from the `backend/` directory
    - Check that all dependencies are installed: `pip install -r requirements.txt`
 
-2. **"GOOGLE_API_KEY not found" Error**
+2. **"OPENAI_API_KEY not found" Error**
    - Create a `.env` file in the `backend/` directory
-   - Add your Google AI API key: `GOOGLE_API_KEY=your_key_here`
+   - Add your OpenAI API key: `OPENAI_API_KEY=your_key_here`
 
 3. **Frontend can't connect to backend**
    - Ensure backend is running on port 8000
@@ -146,7 +148,7 @@ frontend/
 ### Environment Variables for Production
 ```bash
 # Security
-GOOGLE_API_KEY=your_production_key
+OPENAI_API_KEY=your_production_openai_key
 CORS_ORIGINS=["https://yourdomain.com"]
 
 # Performance

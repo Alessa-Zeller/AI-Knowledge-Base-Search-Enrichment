@@ -16,8 +16,8 @@ class Settings(BaseSettings):
     api_host: str = Field(default="0.0.0.0", env="API_HOST")
     api_port: int = Field(default=8000, env="API_PORT")
     
-    # Google AI Configuration
-    google_api_key: str = Field(..., env="GOOGLE_API_KEY")
+    # Google AI Configuration (optional when using OpenAI)
+    google_api_key: Optional[str] = Field(default=None, env="GOOGLE_API_KEY")
     
     # Database Configuration
     chroma_db_path: str = Field(default="./chroma_db", env="CHROMA_DB_PATH")
@@ -34,6 +34,7 @@ class Settings(BaseSettings):
         env="WIKIPEDIA_API_URL"
     )
     openai_api_key: Optional[str] = Field(default=None, env="OPENAI_API_KEY")
+    openai_model: str = Field(default="gpt-4o-mini", env="OPENAI_MODEL")
     
     # CORS Configuration
     cors_origins: list[str] = Field(default=["*"], env="CORS_ORIGINS")

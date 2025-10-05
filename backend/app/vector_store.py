@@ -4,7 +4,6 @@ from chromadb.config import Settings
 from langchain_community.vectorstores import Chroma
 from typing import List, Dict, Any
 from dotenv import load_dotenv
-from light_embed import TextEmbedding
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
 

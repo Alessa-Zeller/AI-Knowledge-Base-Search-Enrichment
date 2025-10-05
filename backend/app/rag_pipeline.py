@@ -1,6 +1,6 @@
 import json
 from typing import Dict, Any, List
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_openai import ChatOpenAI
 from app.vector_store import get_vector_store
 from app.models import (
     SearchResponse, 
@@ -22,19 +22,19 @@ class RAGPipeline:
     """
     
     def __init__(self):
-        """Initialize the RAG pipeline with Gemini LLM and vector store"""
-        # Initialize Gemini LLM
-        self.llm = ChatGoogleGenerativeAI(
-            model="gemini-2.5-flash",  # Fast and efficient model
-            google_api_key=os.getenv("GOOGLE_API_KEY"),
-            temperature=0.3,  # Lower = more focused, higher = more creative
-            max_output_tokens=2048
+        """Initialize the RAG pipeline with OpenAI LLM and vector store"""
+        # Initialize OpenAI LLM
+        self.llm = ChatOpenAI(
+            model=os.getenv("OPENAI_MODEL", "gpt-4o-mini"),
+            api_key=os.getenv("OPENAI_API_KEY"),
+            temperature=0.3,
+            max_tokens=2048
         )
         
         # Get vector store instance
         self.vector_store = get_vector_store()
         
-        print("✅ RAG Pipeline initialized with Gemini")
+        print("✅ RAG Pipeline initialized with OpenAI")
     
     def retrieve_relevant_chunks(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
         """
@@ -275,7 +275,7 @@ Now, respond in JSON format:"""
             prompt = self.create_prompt(query, context)
             
             # Step 4: Get LLM response
-            print("🤖 Generating answer with Gemini...")
+            print("🤖 Generating answer with OpenAI...")
             llm_response = self.llm.invoke(prompt)
             response_text = llm_response.content
             
